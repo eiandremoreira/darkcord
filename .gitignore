@@ -1,0 +1,10 @@
+# Dirs
+/dist
+
+# Files
+index.ts
+scripts.json
+import_map.json
+
+# Project exclude paths
+/node_modules/
