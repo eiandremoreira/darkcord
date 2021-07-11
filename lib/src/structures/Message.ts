@@ -14,7 +14,7 @@ class Message {
         private _channel: TextChannel,
         private _guild: Guild,
         private _author: User,
-        private _member: Member,
+        private _member: Member | null,
         private _content: string,
         private _timestamp: Date,
         private _editedAt: Date,
@@ -55,7 +55,7 @@ class Message {
       return this._content
     }
 
-    public get member (): Member {
+    public get member (): Member | null{
       return this._member
     }
 
