@@ -4,6 +4,7 @@ import Guild from './Guild'
 import User from './User'
 import { MessageOptions } from '../types/Interfaces'
 import Embed from './Embed'
+import type Member from './Member'
 
 class Message {
     private _embeds: Embed[] = [];
@@ -13,7 +14,7 @@ class Message {
         private _channel: TextChannel,
         private _guild: Guild,
         private _author: User,
-        private _member: any | null,
+        private _member: Member,
         private _content: string,
         private _timestamp: Date,
         private _editedAt: Date,
@@ -48,6 +49,42 @@ class Message {
 
     public set embeds (embeds: Embed[]) {
       this._embeds = embeds
+    }
+
+    public get content (): string {
+      return this._content
+    }
+
+    public get member (): Member {
+      return this._member
+    }
+
+    public get timestamp (): Date {
+      return this._timestamp
+    }
+
+    public get type (): number {
+      return this._type
+    }
+
+    public get tts (): boolean {
+      return this._tts
+    }
+
+    public get pinned (): boolean {
+      return this._pinned
+    }
+
+    public get nonce (): string | number {
+      return this._nonce
+    }
+
+    public get mentionedEveryone(): boolean {
+      return this._mentionedEveryone
+    }
+
+    public get editedAt() {
+      return this._editedAt ? this._editedAt : null
     }
 
     public async edit (newContent: string | Embed | MessageOptions) {
