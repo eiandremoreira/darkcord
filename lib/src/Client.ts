@@ -9,7 +9,7 @@ import type Guild from './structures/Guild'
 import type BaseChannel from './structures/channels/BaseChannel'
 import type Emoji from './structures/Emoji'
 import type { ClientOptions, ClientOptions2 } from './types/Interfaces'
-import Message from './structures/Message'
+import { IntentsType } from './types/Types'
 
 class Client extends EventEmitter {
     public rest: RestAPI;
@@ -35,10 +35,8 @@ class Client extends EventEmitter {
       if (this._options?.intents) {
         for (const intent of this._options?.intents!) {
           if (typeof intent === 'string') {
-            // @ts-ignore
-            if (Intents[intent]) {
-              // @ts-ignore
-              intents |= Intents[intent]
+            if (Intents[<IntentsType>intent]) {
+              intents |= Intents[<IntentsType>intent]
             }
           } else {
             intents |= intent
