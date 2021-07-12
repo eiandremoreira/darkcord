@@ -9,7 +9,7 @@ import type Guild from './structures/Guild'
 import type BaseChannel from './structures/channels/BaseChannel'
 import type Emoji from './structures/Emoji'
 import type { ClientOptions, ClientOptions2 } from './types/Interfaces'
-import { IntentsType } from './types/Types'
+import type { IntentsType } from './types/Types'
 
 class Client extends EventEmitter {
     public rest: RestAPI;
