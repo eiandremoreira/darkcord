@@ -145,6 +145,18 @@ class Guild {
       return this._maxPresences
     }
 
+    public get presenceCount (): number {
+      return this._presenceCount
+    }
+
+    public get banner (): string {
+      return this._banner
+    }
+
+    public get discoverySplash (): string {
+      return this._discoverySplash
+    }
+
     public get explicitContentFilter (): number {
       return this._explicitContentFilter
     }
@@ -173,8 +185,36 @@ class Guild {
       return this._memberCount
     }
 
+    public get client (): Client {
+      return this._client
+    }
+
     public get rulesChannelId (): string {
       return this._rulesChannelId
+    }
+
+    public get features (): any[] {
+      return this._features
+    }
+
+    public get ownerId (): string {
+      return this._ownerId
+    }
+
+    public get owner (): Member | any {
+      let owner = this.members.get(this.ownerId)
+
+      if (!owner) {
+        const resolve = new Resolve(this.client);
+
+        (async () => {
+          const ownerMember = await this.client.rest.fetch.member(this.id, this.ownerId)
+          owner = resolve.resolveMember(ownerMember)
+          this.members.set(this.ownerId, owner)
+        })
+      }
+
+      return owner
     }
 
     public async rulesChannel (): Promise<GuildChannel> {

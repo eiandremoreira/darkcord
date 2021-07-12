@@ -17,9 +17,9 @@ class Fetch {
     return res.json()
   }
 
-  async member (guildId: string, userId: string): Promise<any> {
+  async member (guildId: string, memberId: string): Promise<any> {
     const res = await fetch(
-            `${Constants.API}/${EndPoints.guilds}/${guildId}/${EndPoints.members}/${userId}`,
+            `${Constants.API}/${EndPoints.guilds}/${guildId}/${EndPoints.members}/${memberId}`,
             { headers }
     )
 

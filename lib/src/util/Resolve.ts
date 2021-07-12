@@ -5,7 +5,7 @@ import Member from '../structures/Member'
 import Role from '../structures/Role'
 import Guild from '../structures/Guild'
 import BaseChannel from '../structures/channels/BaseChannel'
-import { ChannelType, ChannelTypeDef, EventNoResolvable, EventResolvable } from '../types/Types'
+import { ChannelType, ChannelTypeDef, EventNoResolvable } from '../types/Types'
 import Message from '../structures/Message'
 import TextChannel from '../structures/channels/TextChannel'
 import { Events } from '../constants/Events'
@@ -245,9 +245,10 @@ class Resolve {
 
     if (!member) {
       member = await client.rest.fetch.member(guild_id, author?.id)
-    }
+      member = this.resolveMember(member)
 
-    member = this.resolveMember(member)
+      guild?.members?.set(member.user.id, member)
+    }
 
     const resolvableMessage: Message = this.resolveMessageInstance(message, client, channel, guild, user, member)
 
@@ -309,4 +310,5 @@ export function resolveEvents (event: string): Events {
   const ev = <EventNoResolvable>event
   return Events[ev]
 }
+
 export default Resolve

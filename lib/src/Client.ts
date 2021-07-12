@@ -10,6 +10,7 @@ import type BaseChannel from './structures/channels/BaseChannel'
 import type Emoji from './structures/Emoji'
 import type { ClientOptions, ClientOptions2 } from './types/Interfaces'
 import type { IntentsType } from './types/Types'
+import type Member from './structures/Member'
 
 class Client extends EventEmitter {
     public rest: RestAPI;
