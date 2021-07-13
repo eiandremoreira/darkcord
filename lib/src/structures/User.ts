@@ -1,3 +1,5 @@
+import { ImageFormat } from '../types/Types'
+
 class User {
   constructor (
         private _id: string,
@@ -54,6 +56,16 @@ class User {
 
   public get publicFlags (): number {
     return this._publicFlags
+  }
+
+  public get avatar (): string {
+    return this._avatar
+  }
+
+  public avatarURL ({ format = 'webp', dynamic = false, size = '128' }: { format: ImageFormat, dynamic: boolean, size: '128' | '2048' }) {
+    if (dynamic) format = this.avatar.startsWith('a_') ? 'gif' : format
+
+    return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.${format}?${size}`
   }
 }
 

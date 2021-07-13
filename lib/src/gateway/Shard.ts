@@ -7,8 +7,8 @@ import { Events } from '../constants/Events'
 import { resolveEvents } from '../util/Resolve'
 import EventHandler from '../handler/EventHandler'
 import { EventResolvable } from '../types/Types'
-import User from '../structures/User'
 import Erlpack from 'erlpack'
+import ClientUser from '../ClientUser'
 
 class Shard extends EventEmitter {
   private ws: WebSocket | null
@@ -45,15 +45,11 @@ class Shard extends EventEmitter {
 
         if (d?.user) {
           const clientUser = d.user
-          this.client.user = new User(
+          this.client.user = new ClientUser(
             clientUser.id,
             clientUser.username,
             clientUser.discriminator,
             clientUser.avatar,
-            clientUser.bot,
-            false,
-            clientUser.mfa_enabled,
-            false,
             clientUser.verified,
             clientUser.flags
           )
