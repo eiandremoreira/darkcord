@@ -1,3 +1,4 @@
+import { ImageFormat } from '../types/Types'
 import User from './User'
 
 class Member {
@@ -8,7 +9,9 @@ class Member {
         private _joinedDate: Date,
         private _boosterSince: Date,
         private _deaf: boolean = false,
-        private _muted: boolean = false
+        private _muted: boolean = false,
+        private _avatar: string,
+        private _guildId: string
   ) {
     return this
   }
@@ -39,6 +42,15 @@ class Member {
 
   public get user (): User {
     return this._user
+  }
+
+  public get avatar (): string {
+    return this._avatar
+  }
+
+  public avatarURL ({ format = 'webp', dynamic = false, size = '128' }: { format: ImageFormat, dynamic: boolean, size: '128' | '2048' }) {
+    if (dynamic) format = this.avatar.startsWith('a_') ? 'gif' : format
+    return `https://cdn.discordapp.com/guilds/${this._guildId}/users/${this.id}/avatars/${this.avatar}.${format}?${size}`
   }
 }
 

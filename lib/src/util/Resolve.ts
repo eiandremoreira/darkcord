@@ -37,13 +37,16 @@ class Resolve {
     )
   }
 
-  resolveMember (member: API_Member) {
+  resolveMember (member: API_Member, guildId: string) {
     const user = this.resolveUser(member.user)
 
     const {
       nick,
       joined_at,
-      premium_since
+      premium_since,
+      avatar,
+      muted,
+      deaf
     } = member
 
     return new Member(
@@ -51,7 +54,11 @@ class Resolve {
       user,
       nick,
       joined_at,
-      premium_since
+      premium_since,
+      deaf,
+      muted,
+      avatar,
+      guildId
     )
   }
 
@@ -245,7 +252,7 @@ class Resolve {
 
     if (!member) {
       member = await client.rest.fetch.member(guild_id, author?.id)
-      member = this.resolveMember(member)
+      member = this.resolveMember(member, guild_id)
 
       guild?.members?.set(member.user.id, member)
     }

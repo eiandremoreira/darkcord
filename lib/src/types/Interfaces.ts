@@ -69,8 +69,9 @@ export interface API_Member {
     joined_at: Date,
     premium_since: Date,
     deaf: boolean,
-    mute: boolean,
-    user: API_User
+    muted: boolean,
+    user: API_User,
+    avatar: string
 }
 
 export interface API_Role {
